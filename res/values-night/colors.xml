@@ -17,4 +17,6 @@
 
 <resources>
     <color name="ic_launcher_clock_background">#424242</color>
+    <color name="default_background">#121212</color>
+    <color name="accent_color">#FEF177</color>
 </resources>
