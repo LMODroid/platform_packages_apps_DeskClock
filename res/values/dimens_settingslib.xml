@@ -15,11 +15,6 @@
   limitations under the License.
 -->
 <resources>
-    <color name="ic_launcher_clock_background">#424242</color>
-    <color name="default_background">#121212</color>
-    <color name="accent_color">#FEF177</color>
-    <color name="secondary_color">#212121</color>
-
     <!-- Collapsing toolbar layout dimensions -->
     <dimen name="settingslib_toolbar_layout_height">179dp</dimen>
     <dimen name="settingslib_scrim_visible_height_trigger">137dp</dimen>
