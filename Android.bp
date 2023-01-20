@@ -46,7 +46,8 @@ android_app {
         "androidx-constraintlayout_constraintlayout"
     ],
     required: [
-        "com.android.deskclock_whitelist"
+        "com.android.deskclock_whitelist",
+        "default-permissions-com.android.deskclock"
     ],
 }
 
@@ -55,5 +56,13 @@ prebuilt_etc {
     product_specific: true,
     sub_dir: "sysconfig",
     src: "com.android.deskclock_whitelist.xml",
+    filename_from_src: true,
+}
+
+prebuilt_etc {
+    name: "default-permissions-com.android.deskclock",
+    product_specific: true,
+    sub_dir: "default-permissions",
+    src: "default-permissions-com.android.deskclock.xml",
     filename_from_src: true,
 }
