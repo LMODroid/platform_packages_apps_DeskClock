@@ -425,14 +425,14 @@ public final class TimerFragment extends DeskClockFragment {
 
     @Override
     public void onRightButtonClick(@NonNull ImageView right) {
-        if (mCurrentView != mCreateTimerView) {
+        if (mCreateTimerView != null && mCurrentView != mCreateTimerView) {
             animateToView(mCreateTimerView, null, true);
         }
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (mCurrentView == mCreateTimerView) {
+        if (mCreateTimerView != null && mCurrentView == mCreateTimerView) {
             return mCreateTimerView.onKeyDown(keyCode, event);
         }
         return super.onKeyDown(keyCode, event);
