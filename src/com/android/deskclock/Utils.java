@@ -553,10 +553,12 @@ public class Utils {
         /** Whether or not to always make the view visible to talkback */
         private final boolean mIsAlwaysAccessibilityVisible;
 
+        @SuppressWarnings("unused")
         public ClickAccessibilityDelegate(String label) {
             this(label, false);
         }
 
+        @SuppressWarnings("unused")
         public ClickAccessibilityDelegate(String label, boolean isAlwaysAccessibilityVisible) {
             mLabel = label;
             mIsAlwaysAccessibilityVisible = isAlwaysAccessibilityVisible;
