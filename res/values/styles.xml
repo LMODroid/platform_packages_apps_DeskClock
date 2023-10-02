@@ -48,7 +48,7 @@
 
     <style name="world_clock_time">
         <item name="android:textSize">48sp</item>
-        <item name="android:textColor">@color/analog_appwidget_minute_hand_color</item>
+        <item name="android:textColor">@*android:color/system_neutral2_50</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
