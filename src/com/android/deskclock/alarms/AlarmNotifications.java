@@ -47,7 +47,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Objects;
 
-public final class AlarmNotifications {
+final class AlarmNotifications {
     static final String EXTRA_NOTIFICATION_ID = "extra_notification_id";
 
     /**
@@ -400,7 +400,7 @@ public final class AlarmNotifications {
         service.startForeground(ALARM_FIRING_NOTIFICATION_ID, notification.build());
     }
 
-    public static synchronized void clearNotification(Context context, AlarmInstance instance) {
+    static synchronized void clearNotification(Context context, AlarmInstance instance) {
         LogUtils.v("Clearing notifications for alarm instance: " + instance.mId);
         NotificationManagerCompat nm = NotificationManagerCompat.from(context);
         final int id = instance.hashCode();

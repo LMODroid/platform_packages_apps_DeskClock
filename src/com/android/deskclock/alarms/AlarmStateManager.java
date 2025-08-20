@@ -132,17 +132,6 @@ public final class AlarmStateManager extends BroadcastReceiver {
     private static final StateChangeScheduler sStateChangeScheduler =
             new AlarmManagerStateChangeScheduler();
 
-    private static final String ACTION_SET_POWEROFF_ALARM =
-            "org.codeaurora.poweroffalarm.action.SET_ALARM";
-
-    private static final String ACTION_CANCEL_POWEROFF_ALARM =
-            "org.codeaurora.poweroffalarm.action.CANCEL_ALARM";
-
-    private static final String POWER_OFF_ALARM_PACKAGE =
-            "com.qualcomm.qti.poweroffalarm";
-
-    private static final String TIME = "time";
-
     private static Calendar getCurrentTime() {
         return DataModel.getDataModel().getCalendar();
     }
@@ -153,10 +142,6 @@ public final class AlarmStateManager extends BroadcastReceiver {
      */
     private static void updateNextAlarm(Context context) {
         final AlarmInstance nextAlarm = getNextFiringAlarm(context);
-
-        if (nextAlarm != null) {
-            setPowerOffAlarm(context, nextAlarm);
-        }
 
         updateNextAlarmInAlarmManager(context, nextAlarm);
     }
@@ -501,7 +486,6 @@ public final class AlarmStateManager extends BroadcastReceiver {
         scheduleInstanceStateChange(context, instance.getMissedTimeToLive(),
                 instance, AlarmInstance.DISMISSED_STATE);
 
-        cancelPowerOffAlarm(context, instance);
         // Instance is not valid anymore, so find next alarm that will fire and notify system
         updateNextAlarm(context);
     }
@@ -531,7 +515,6 @@ public final class AlarmStateManager extends BroadcastReceiver {
             updateParentAlarm(context, instance);
         }
 
-        cancelPowerOffAlarm(context, instance);
         updateNextAlarm(context);
     }
 
@@ -543,8 +526,6 @@ public final class AlarmStateManager extends BroadcastReceiver {
         instance.mAlarmState = AlarmInstance.DISMISSED_STATE;
         final ContentResolver contentResolver = context.getContentResolver();
         AlarmInstance.updateInstance(contentResolver, instance);
-
-        cancelPowerOffAlarm(context, instance);
     }
 
     /**
@@ -917,23 +898,6 @@ public final class AlarmStateManager extends BroadcastReceiver {
                 AlarmInstance instance, int newState);
 
         void cancelScheduledInstanceStateChange(Context context, AlarmInstance instance);
-    }
-
-    private static void setPowerOffAlarm(Context context, AlarmInstance instance) {
-         LogUtils.i("Set next power off alarm : instance id "+ instance.mId);
-         Intent intent = new Intent(ACTION_SET_POWEROFF_ALARM);
-         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-         intent.setPackage(POWER_OFF_ALARM_PACKAGE);
-         intent.putExtra(TIME, instance.getAlarmTime().getTimeInMillis());
-         context.sendBroadcast(intent);
-    }
-
-    private static void cancelPowerOffAlarm(Context context, AlarmInstance instance) {
-         Intent intent = new Intent(ACTION_CANCEL_POWEROFF_ALARM);
-         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-         intent.putExtra(TIME, instance.getAlarmTime().getTimeInMillis());
-         intent.setPackage(POWER_OFF_ALARM_PACKAGE);
-         context.sendBroadcast(intent);
     }
 
     /**
